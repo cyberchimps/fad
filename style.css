@@ -1,0 +1,108 @@
+/*
+Theme Name: fad
+Theme URI: http://wordpress.org/themes/fad
+Author: CyberChimps
+Author URI: http://cyberchimps.com/
+Description: A trendy, flat and minimalist style-only theme by CyberChimps, built on the BlankSlate boilerplate. fad is also a super lightweight, fullscreen, responsive CSS framework grid, perfect for web designers and programmers who are learning new design practices. Need official web design (CSS and HTML) coding support? http://cyberchimps.com/plus/
+Version: 0.1
+License: GNU General Public License
+License URI: https://www.gnu.org/licenses/gpl.html
+Tags: black, blue, gray, silver, white, light, one-column, two-columns, three-columns, right-sidebar, fluid-layout, responsive-layout, custom-menu, featured-images, flexible-header, microformats, sticky-post
+Text Domain: fad
+
+fad WordPress Theme Design © 2010-2014 CyberChimps - Built on the BlankSlate Boilerplate © 2011-2014 TidyThemes
+fad is distributed under the terms of the GNU GPL
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{font-size:100%;font:inherit;padding:0;border:0;margin:0;vertical-align:baseline}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}.clear{clear:both}
+th, td{padding:2px}big{font-size:125%}small, sup, sub{font-size:80%}sup{vertical-align:super}sub{vertical-align:sub}dd{margin-left:20px}kbd, tt{font-family:courier;font-size:80%}ins{text-decoration:underline}del, strike, s{text-decoration:line-through}
+
+body{font-family:'open sans',arial,helvetica,sans-serif;font-size:16px;color:#777;background:#3498db}
+p, .entry-meta, .entry-footer{line-height:145%;margin:20px 0}
+a{color:#09f}
+strong{font-weight:bold}
+em{font-style:italic}
+code{font-family:'courier new',courier,serif;color:#999}
+pre{overflow-x:auto;white-space:pre-wrap}
+hr{height:1px;color:#ccc;border:0 none;margin:30px 0;background-color:#ccc}
+blockquote{padding:20px;border-left:4px solid #09f;margin:20px 2%;background:#f6f6f6}
+.entry-content ul, .entry-content ol, .comment-body ul, .comment-body ol{margin-left:20px !important}
+.entry-content ul, .comment-body ul{list-style:disc inside}
+#container ol, .comment-body ol{list-style:decimal inside}
+#sidebar .widget-container ul{display:block;margin-left:10px}
+input, textarea{color:#888;padding:10px;border:0 none;border-left:4px solid #ccc;background:#f6f6f6}
+input[type="submit"]{font-family:'open sans',arial,helvetica,sans-serif;font-size:15px;border:0 none;background:none;cursor:pointer}
+a img, input[type="image"]{border:0 none}
+img, video, select, div.wp-caption{max-width:100%;height:auto}
+table{width:100%}
+
+#container h1, h2, h3, h4, h5, h6{line-height:120%;margin-bottom:20px}
+.single #content h2, .single #content h3, .single #content h4, .single #content h5, .single #content h6{margin-top:30px}
+h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a{font-weight:700;color:#777;text-decoration:none;text-transform:lowercase}
+h1, h1 a{font-size:40px}
+#site-title, #site-title a, #site-title h1, #site-title h1 a{font-family:arial,sans-serif;font-size:100px;font-weight:bold;color:#fff;text-decoration:none;text-transform:lowercase;text-shadow:1px 1px 3px #777;padding:0;margin:0}
+h2, h2 a{font-size:35px}
+h3, h3 a{font-size:30px}
+h4, h4 a{font-size:25px}
+h5, h5 a{font-size:20px}
+h6, h6 a{font-size:16px}
+
+#wrapper{max-width:100%;margin:0 auto}
+#header, #footer{padding:2%;clear:both;background:url(images/bg.jpg) no-repeat scroll center center / 100% auto rgba(0, 0, 0, 0)}
+#site-description{font-size:20px;color:#fff;text-shadow:1px 1px 1px #666}
+#search #s{font-size:16px;padding:13px;border:none;margin-top:10px;background:url(images/find.png) no-repeat scroll right center #fff;float:right}
+#container{line-height:200%;margin-top:29px}
+#content{width:64%;padding:0 2%;float:left}
+#sidebar{width:30%;margin-right:2%;float:right}
+#copyright, #copyright a{color:#fff;font-weight:bold;text-shadow:1px 1px 1px #666}
+
+article.post, article.page, article.attachment, .widget-container, #respond, #comments-list .comment, #trackbacks-list, #nav-below a{padding:4%;margin:0 0 29px;background:#fff}
+#comments-list .children .comment{padding-bottom:0}
+.blog article.post, .archive article.post{width:40.3%;height:250px;overflow:hidden;float:left}
+.blog article.post:nth-child(odd), .archive article.post:nth-child(even){margin-right:3.2%}
+
+#menu{margin:20px 0 0}
+#menu ul li a{display:inline-block;color:#09f;text-decoration:none;padding:15px 20px;margin:10px 10px 0 0;background:#fff;opacity:1}
+#menu ul li a:hover{opacity:0.9}
+#menu ul, #menu ul li{display:inline;margin:0;padding:0;list-style:none}
+#menu ul .current-menu-item a, #menu ul .current_page_item a{color:#666}
+
+.entry-meta, .entry-meta a, .entry-footer, .entry-footer a, .comment-meta, .comment-meta a{font-size:14px;margin-bottom:0}
+#nav-below a{display:inline-block;text-decoration:none;margin-right:30px;float:left}
+.sticky{}
+.archive .entry-title, .archive-meta, .search .entry-title, .attachment .entry-title, .attachment .entry-title a, #comments-list .comments-title{color:#fff}
+#content #trackbacks-list .comments-title, #content #reply-title{margin-top:0}
+#respond input{width:40%;display:block}
+#respond input:focus, #respond textarea:focus{background:#fff}
+#respond textarea{width:91%;height:100px;overflow:auto}
+#respond #submit{width:auto;font-weight:bold}
+.comment-author{line-height:100%}
+.avatar{width:48px;height:48px;margin:0 5px 5px 0;float:left}
+.bypostauthor{background:#f6f6f6}
+#wp-calendar{width:100%}
+#wp-calendar td{text-align:center}
+#wp-calendar #prev{text-align:left}
+#wp-calendar #next{text-align:right}
+.wp-post-image{margin-top:10px}
+.wp-caption{margin:20px 0}
+.wp-caption-text, .alignleft, .aligncenter, .alignright{text-align:center}
+#content div[id*='gallery-'] img{border:4px solid #09f}
+.gallery-caption{}
+p.attachment{text-align:center}
+.attachment .nav-previous a, .attachment .nav-next a{display:block;width:50px;height:50px;font-size:30px;color:#fff;text-align:center;text-decoration:none;line-height:40px;border-radius:25px;margin:10px;background:#09f;float:left}
+.attachment .nav-next a{float:right}
+.alignleft{margin:20px 20px 20px 0;float:left}
+.alignright{margin:20px 0 20px 20px;float:right}
+.aligncenter{display:block;margin:20px auto;clear:both}
+.gallery{margin:20px auto !important}
+
+@media all and (max-width:767px){#header, #footer{background-size:auto}#container{margin-top:15px}#content, #sidebar{width:96%;padding:0 2%;margin-right:0}article.post, article.page, article.attachment, .widget-container, #respond, #comments-list .comment, #trackbacks-list, #nav-below a{margin:0 0 15px}.blog article.post, .archive article.post{width:40.8%}.blog article.post:nth-child(odd), .archive article.post:nth-child(even){margin-right:2.2%}}
+@media all and (max-width:480px){#container{margin-top:10px}#site-title, #site-title a, #site-title h1, #site-title h1 a{font-size:75px}.blog article.post, .archive article.post{width:92%}.blog article.post:nth-child(odd), .archive article.post:nth-child(even){margin-right:0}article.post, article.page, article.attachment, .widget-container, #respond, #comments-list .comment, #trackbacks-list, #nav-below a{margin:0 0 10px}}
+@media all and (max-width:479px){#search #s{margin-right:10px;float:left}}
+@media all and (max-width:320px){}
+
+.screen-reader-text{clip:rect(1px, 1px, 1px, 1px);position:absolute !important}
+.comment-notes, .form-allowed-tags, #search #searchsubmit{display:none}
+.attachment #nav-above{display:block}
