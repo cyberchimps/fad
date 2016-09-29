@@ -3,10 +3,10 @@ Theme Name: fad
 Author: CyberChimps
 Author URI: http://cyberchimps.com/
 Description: A trendy, flat and minimalist style-only theme by CyberChimps, built on the BlankSlate boilerplate. fad is also a super lightweight, fullscreen, responsive CSS framework grid, perfect for web designers and programmers who are learning new design practices. Need official web design (CSS and HTML) coding support? http://cyberchimps.com/plus/
-Version: 0.2
+Version: 0.3
 License: GNU General Public License
 License URI: https://www.gnu.org/licenses/gpl.html
-Tags: black, blue, gray, silver, white, light, one-column, two-columns, three-columns, right-sidebar, fluid-layout, responsive-layout, custom-menu, featured-images, flexible-header, microformats, sticky-post
+Tags: one-column, two-columns, three-columns, right-sidebar, custom-menu, featured-images, flexible-header, microformats, sticky-post
 Text Domain: fad
 
 fad WordPress Theme Design © 2010-2014 CyberChimps - Built on the BlankSlate Boilerplate © 2011-2014 TidyThemes
@@ -41,7 +41,7 @@ table{width:100%}
 .single #content h2, .single #content h3, .single #content h4, .single #content h5, .single #content h6{margin-top:30px}
 h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a{font-weight:700;color:#777;text-decoration:none;text-transform:lowercase}
 h1, h1 a{font-size:40px}
-#site-title, #site-title a, #site-title h1, #site-title h1 a{font-family:arial,sans-serif;font-size:100px;font-weight:bold;color:#fff;text-decoration:none;text-transform:lowercase;text-shadow:1px 1px 3px #777;padding:0;margin:0}
+#site-title, #site-title a, #site-title h1, #site-title h1 a{font-family:arial,sans-serif;font-size:100px;font-weight:bold;color:#fff;text-decoration:none;text-transform:unset;text-shadow:1px 1px 3px #777;padding:0;margin:0}
 h2, h2 a{font-size:35px}
 h3, h3 a{font-size:30px}
 h4, h4 a{font-size:25px}
@@ -59,7 +59,7 @@ h6, h6 a{font-size:16px}
 
 article.post, article.page, article.attachment, .widget-container, #respond, #comments-list .comment, #trackbacks-list, #nav-below a{padding:4%;margin:0 0 29px;background:#fff}
 #comments-list .children .comment{padding-bottom:0}
-.blog article.post, .archive article.post{width:40.3%;height:250px;overflow:hidden;float:left}
+.blog article.post, .archive article.post{width:40.3%;height:auto;overflow:hidden;float:left}
 .blog article.post:nth-child(odd), .archive article.post:nth-child(even){margin-right:3.2%}
 
 #menu{margin:20px 0 0}
@@ -105,3 +105,32 @@ p.attachment{text-align:center}
 .screen-reader-text{clip:rect(1px, 1px, 1px, 1px);position:absolute !important}
 .comment-notes, .form-allowed-tags, #search #searchsubmit{display:none}
 .attachment #nav-above{display:block}
+/* =Top Menu
+-------------------------------------------------------------- */
+.top-menu {
+	float: right;
+	margin: 10px 0;
+	padding: 0;
+}
+
+.top-menu li {
+	display: inline;
+	list-style-type: none;
+}
+
+.top-menu li a {
+	border-left: 1px solid #cccccc;
+	color: #333333;
+	font-size: 13px;
+	padding: 0 4px 0 8px;
+	text-decoration: none;
+}
+
+.top-menu > li:first-child > a {
+	border-left: none;
+}
+
+.top-menu li a:hover {
+	color: #333333;
+}
+
