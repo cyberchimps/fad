@@ -8,8 +8,11 @@ add_theme_support( 'post-thumbnails' );
 global $content_width;
 if ( ! isset( $content_width ) ) $content_width = 640;
 register_nav_menus(
-array( 'main-menu' => __( 'Main Menu', 'fad' ) )
+array( 'main-menu' => __( 'Main Menu', 'fad' ) , 'top-menu' => __( 'Top Menu', 'fad' ))
 );
+
+add_theme_support( 'title-tag' );
+
 }
 add_action( 'wp_enqueue_scripts', 'fad_load_scripts' );
 function fad_load_scripts()
@@ -73,9 +76,148 @@ function fad_comments_number( $count )
 {
 if ( !is_admin() ) {
 global $id;
-$comments_by_type = &separate_comments( get_comments( 'status=approve&post_id=' . $id ) );
-return count( $comments_by_type['comment'] );
+$comments_by_type = get_comments( 'status=approve&post_id=' . $id );
+return count( $comments_by_type );
 } else {
 return $count;
 }
 }
+
+add_action( 'customize_register', 'fad_customizer' );
+function fad_customizer( $wp_customize ) {
+
+	$wp_customize->add_section( 'fad_design_section', array(
+			'title' => __( 'Design', 'fad' ),
+			'priority' => 35,
+	) );
+
+//Main Menu Text Color
+$wp_customize->add_setting( 'fad_main_menu_text_colorpicker', array(
+		'default' => '#09f',
+		'type' => 'option',
+		'sanitize_callback' => 'fad_text_sanitization'
+) );
+
+$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_menu_text_colorpicker', array(
+		'label' => __( 'Main Menu Text Color', 'fad' ),
+		'section' => 'fad_design_section',
+		'settings' => 'fad_main_menu_text_colorpicker',
+) ) );
+
+// Top Menu Text Color
+$wp_customize->add_setting( 'fad_top_menu_text_colorpicker', array(
+		'default' => '#333333',
+		'type' => 'option',
+		'sanitize_callback' => 'fad_text_sanitization'
+) );
+
+$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_menu_text_colorpicker', array(
+		'label' => __( 'Top Menu Text Color', 'fad' ),
+		'section' => 'fad_design_section',
+		'settings' => 'fad_top_menu_text_colorpicker',
+) ) );
+
+$wp_customize->add_section( 'fad_blog_section', array(
+		'title' => __( 'Blog Option', 'fad' ),
+		'priority' => 36,
+) );
+
+$wp_customize->add_setting( 'fad_post_excerpts', array(
+		'type' => 'option',
+		'sanitize_callback' => 'fad_sanitize_checkbox'
+) );
+$wp_customize->add_control( 'post_excerpts', array(
+		'label' => __( 'Post Excerpts', 'fad' ),
+		'section' => 'fad_blog_section',
+		'settings' => 'fad_post_excerpts',
+		'type' => 'checkbox'
+) );
+
+
+$wp_customize->add_setting( 'fad_options_blog_read_more_text', array(
+		'type' => 'option',
+		'sanitize_callback' => 'fad_text_sanitization'
+) );
+$wp_customize->add_control( 'fad_blog_read_more_text', array(
+		'label' => __( 'Read More Text', 'fad' ),
+		'section' => 'fad_blog_section',
+		'default' => __( 'Read More...', 'fad' ),
+		'settings' => 'fad_options_blog_read_more_text',
+		'type' => 'text'
+) );
+
+//Post Excerpts Length
+$wp_customize->add_setting( 'fad_options_blog_excerpt_length', array(
+		'type' => 'option',
+		'sanitize_callback' => 'fad_text_sanitization'
+) );
+$wp_customize->add_control( 'fad_blog_excerpt_length', array(
+		'label' => __( 'Excerpt Length', 'fad' ),
+		'section' => 'fad_blog_section',
+		'default' => 55,
+		'settings' => 'fad_options_blog_excerpt_length',
+		'type' => 'text'
+) );
+
+}
+
+function fad_text_sanitization( $text ) {
+	return sanitize_text_field( $text );
+}
+
+function fad_sanitize_checkbox( $input ) {
+	if( $input ) {
+		$output = '1';
+	}
+	else {
+		$output = false;
+	}
+
+	return $output;
+}
+
+add_action( 'wp_head', 'fad_css_styles', 50 );
+function fad_css_styles(){
+	$main_menu_color = get_option('fad_main_menu_text_colorpicker');
+	$top_menu_color = get_option('fad_top_menu_text_colorpicker');
+	?>
+
+	<style type="text/css" media="all">
+	<?php if ( !empty( $main_menu_color ) ) : ?>
+				#menu ul li a {
+				color:<?php echo $main_menu_color; ?>;
+				}
+	<?php endif; ?>	
+			
+	<?php if ( !empty( $top_menu_color ) ) : ?>
+				.top-menu li a {
+				color:<?php echo $top_menu_color; ?>;
+				}
+	<?php endif; ?>	
+			
+	</style>			
+	<?php 
+}
+
+function fad_excerpt_more( $more ) {
+	
+	$read_more_text = get_option( 'fad_options_blog_read_more_text');
+	if($read_more_text != ''){
+	global $post;
+	return '<p><a href="' . esc_url(get_permalink( $post->ID )) . '">' . $read_more_text . '</a></p>';
+	}else{
+		return $more;
+	}
+}
+add_filter( 'excerpt_more', 'fad_excerpt_more' );
+
+function fad_custom_excerpt_length( $length ) {
+	$read_more_length = get_option( 'fad_options_blog_excerpt_length');
+	
+	if($read_more_length != ''){
+	return $read_more_length;
+	}else{
+		return $length;
+	}
+}
+add_filter( 'excerpt_length', 'fad_custom_excerpt_length', 999 );

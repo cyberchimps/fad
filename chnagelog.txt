@@ -1,0 +1,12 @@
+Fad
+****************
+
+Version 0.3 (09/29/16)
+
+- Added Secondary Menu option (Top Menu)
+- Added the ability To change Menu Text Color
+- Added the ability to specify excerpt length and 'Read More' text on the blog page
+- Compatibility issues fix for WordPress 4.6.1
+
+Version 0.1 (05/19/14)
+- Initial verion released
