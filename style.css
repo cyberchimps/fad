@@ -72,6 +72,8 @@ article.post, article.page, article.attachment, .widget-container, #respond, #co
 #nav-below a{display:inline-block;text-decoration:none;margin-right:30px;float:left}
 .sticky{}
 .archive .entry-title, .archive-meta, .search .entry-title, .attachment .entry-title, .attachment .entry-title a, #comments-list .comments-title{color:#fff}
+.search h2.entry-title{color:#777;}
+#branding {word-wrap: break-word;}
 #content #trackbacks-list .comments-title, #content #reply-title{margin-top:0}
 #respond input{width:40%;display:block}
 #respond input:focus, #respond textarea:focus{background:#fff}
