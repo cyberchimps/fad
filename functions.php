@@ -95,7 +95,8 @@ function fad_customizer( $wp_customize ) {
 
 $wp_customize->add_setting( 'fad_background_colorpicker', array(
 		'default' => '#225277',
-		'type' => 'option'
+		'type' => 'option',
+		'sanitize_callback' => 'fad_text_sanitization'
 ) );
 
 $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'background_colorpicker', array(
