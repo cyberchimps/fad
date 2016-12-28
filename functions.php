@@ -87,13 +87,26 @@ add_action( 'customize_register', 'fad_customizer' );
 function fad_customizer( $wp_customize ) {
 
 	$wp_customize->add_section( 'fad_design_section', array(
-			'title' => __( 'Design', 'fad' ),
+			'title' => __( 'Colors', 'fad' ),
 			'priority' => 35,
 	) );
 
+// Background Color
+
+$wp_customize->add_setting( 'fad_background_colorpicker', array(
+		'default' => '#225277',
+		'type' => 'option'
+) );
+
+$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'background_colorpicker', array(
+		'label' => __( 'Background Color', 'fad' ),
+		'section' => 'fad_design_section',
+		'settings' => 'fad_background_colorpicker',
+) ) );
+
 //Main Menu Text Color
 $wp_customize->add_setting( 'fad_main_menu_text_colorpicker', array(
-		'default' => '#09f',
+		'default' => '#225277',
 		'type' => 'option',
 		'sanitize_callback' => 'fad_text_sanitization'
 ) );
@@ -118,7 +131,7 @@ $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_
 ) ) );
 
 $wp_customize->add_section( 'fad_blog_section', array(
-		'title' => __( 'Blog Option', 'fad' ),
+		'title' => __( 'Blog Options', 'fad' ),
 		'priority' => 36,
 ) );
 
@@ -180,6 +193,7 @@ add_action( 'wp_head', 'fad_css_styles', 50 );
 function fad_css_styles(){
 	$main_menu_color = get_option('fad_main_menu_text_colorpicker');
 	$top_menu_color = get_option('fad_top_menu_text_colorpicker');
+	$background_color = get_option('fad_background_colorpicker');
 	?>
 
 	<style type="text/css" media="all">
@@ -194,6 +208,12 @@ function fad_css_styles(){
 				color:<?php echo $top_menu_color; ?>;
 				}
 	<?php endif; ?>	
+
+	<?php if ( !empty( $background_color ) ) : ?>
+				body {
+				background:<?php echo $background_color; ?>;
+				}
+	<?php endif; ?>
 			
 	</style>			
 	<?php 
