@@ -242,3 +242,13 @@ function fad_custom_excerpt_length( $length ) {
 	}
 }
 add_filter( 'excerpt_length', 'fad_custom_excerpt_length', 999 );
+add_action( 'admin_notices', 'my_admin_notice' );
+function my_admin_notice(){
+	global $fad_check_screen;
+	$fad_check_screen = get_admin_page_title();
+ 
+   if ( $fad_check_screen == 'Manage Themes' )
+{
+          echo '<div class="notice notice-info is-dismissible"><p class="fad-upgrade-callout" style="font-size:18px; "><a href="https://cyberchimps.com/free-download-50-stock-images-use-please/?utm_source=Fad" target="_blank" style="text-decoration:none;">FREE - Download CyberChimps\' Pack of 50 High-Resolution Stock Images Now</a></p></div>';
+}
+}
