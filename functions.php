@@ -315,7 +315,7 @@ function fad_admin_notice(){
 		?>
 		<div class="notice notice-info is-dismissible" style="margin-top:15px;">
 		<p>
-		<?php if( $installed_plugins[$plugin] )
+		<?php if( isset( $installed_plugins[$plugin] ) )
 		{
 		?>
 			 <a href="<?php echo admin_url( 'plugins.php' ); ?>">Activate the WPForms Lite plugin</a>
