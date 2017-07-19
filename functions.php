@@ -278,14 +278,26 @@ function fad_admin_notice(){
 
 	if( !class_exists('SlideDeckPlugin') )
 	{
-
+	$plugin='slidedeck/slidedeck.php';
 	$slug = 'slidedeck';
+	$installed_plugins = get_plugins();
+	
 	 if ( $admin_check_screen == 'Manage Themes' )
 	{
 		?>
 		<div class="notice notice-info is-dismissible" style="margin-top:15px;">
 		<p>
+		<?php if( $installed_plugins[$plugin] )
+		{
+		?>
+			 <a href="<?php echo admin_url( 'plugins.php' ); ?>">Activate the SlideDeck Lite plugin</a>
+		 <?php
+		}
+		else
+		{
+		 ?>
 		 <a href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug ); ?>">Install the SlideDeck Lite plugin</a>
+		 <?php } ?>
 		</p>
 		</div>
 		<?php
@@ -294,14 +306,26 @@ function fad_admin_notice(){
 
 	if( !class_exists('WPForms') )
 	{
-
+	$plugin   = 'wpforms-lite/wpforms.php';
 	$slug = 'wpforms-lite';
+	$installed_plugins = get_plugins();
+	
 	 if ( $admin_check_screen == 'Manage Themes' )
 	{
 		?>
 		<div class="notice notice-info is-dismissible" style="margin-top:15px;">
 		<p>
-		 <a href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug ); ?>">Install the WP Forms Lite plugin</a>
+		<?php if( $installed_plugins[$plugin] )
+		{
+		?>
+			 <a href="<?php echo admin_url( 'plugins.php' ); ?>">Activate the WPForms Lite plugin</a>
+		 <?php
+		}
+		else
+		{
+		 ?>	 
+ 		 <a href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug ); ?>">Install the WP Forms Lite plugin</a>
+		 <?php } ?>
 		</p>
 		</div>
 		<?php
