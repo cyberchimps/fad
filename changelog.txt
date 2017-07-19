@@ -1,5 +1,8 @@
 Fad
 ****************
+Version 1.1 (07/18/17)
+- Added visible edit links in the customizer preview
+
 Version 1.0 (04/21/17)
 - Fixed issue with PHP version 7.1
 - Fixed issue with loading google fonts (used protocol relative link)

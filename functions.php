@@ -1,4 +1,7 @@
 <?php
+
+require( get_template_directory() . '/admin-about.php' );
+
 add_action( 'after_setup_theme', 'fad_setup' );
 function fad_setup()
 {
@@ -69,7 +72,7 @@ function fad_custom_pings( $comment )
 $GLOBALS['comment'] = $comment;
 ?>
 <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>"><?php echo comment_author_link(); ?></li>
-<?php 
+<?php
 }
 add_filter( 'get_comments_number', 'fad_comments_number' );
 function fad_comments_number( $count )
@@ -202,26 +205,26 @@ function fad_css_styles(){
 				#menu ul li a {
 				color:<?php echo $main_menu_color; ?>;
 				}
-	<?php endif; ?>	
-			
+	<?php endif; ?>
+
 	<?php if ( !empty( $top_menu_color ) ) : ?>
 				.top-menu li a {
 				color:<?php echo $top_menu_color; ?>;
 				}
-	<?php endif; ?>	
+	<?php endif; ?>
 
 	<?php if ( !empty( $background_color ) ) : ?>
 				body {
 				background:<?php echo $background_color; ?>;
 				}
 	<?php endif; ?>
-			
-	</style>			
-	<?php 
+
+	</style>
+	<?php
 }
 
 function fad_excerpt_more( $more ) {
-	
+
 	$read_more_text = get_option( 'fad_options_blog_read_more_text');
 	if($read_more_text != ''){
 	global $post;
@@ -234,7 +237,7 @@ add_filter( 'excerpt_more', 'fad_excerpt_more' );
 
 function fad_custom_excerpt_length( $length ) {
 	$read_more_length = get_option( 'fad_options_blog_excerpt_length');
-	
+
 	if($read_more_length != ''){
 	return $read_more_length;
 	}else{
@@ -246,9 +249,72 @@ add_action( 'admin_notices', 'my_admin_notice' );
 function my_admin_notice(){
 	global $fad_check_screen;
 	$fad_check_screen = get_admin_page_title();
- 
+
    if ( $fad_check_screen == 'Manage Themes' )
 {
           echo '<div class="notice notice-info is-dismissible"><p class="fad-upgrade-callout" style="font-size:18px; "><a href="https://cyberchimps.com/free-download-50-stock-images-use-please/?utm_source=Fad" target="_blank" style="text-decoration:none;">FREE - Download CyberChimps\' Pack of 50 High-Resolution Stock Images Now</a></p></div>';
 }
+}
+
+function fad_customize_edit_links( $wp_customize ) {
+
+
+   $wp_customize->selective_refresh->add_partial( 'blogname', array(
+'selector' => '#site-title h1'
+) );
+
+	$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
+		'selector' => '#site-description'
+	) );
+
+}
+add_action( 'customize_register', 'fad_customize_edit_links' );
+add_theme_support( 'customize-selective-refresh-widgets' );
+
+add_action( 'admin_notices', 'fad_admin_notice' );
+function fad_admin_notice(){
+
+	$admin_check_screen = get_admin_page_title();
+
+	if( !class_exists('SlideDeckPlugin') )
+	{
+
+	$slug = 'slidedeck';
+	 if ( $admin_check_screen == 'Manage Themes' )
+	{
+		?>
+		<div class="notice notice-info is-dismissible" style="margin-top:15px;">
+		<p>
+		 <a href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug ); ?>">Install the SlideDeck Lite plugin</a>
+		</p>
+		</div>
+		<?php
+	}
+	}
+
+	if( !class_exists('WPForms') )
+	{
+
+	$slug = 'wpforms-lite';
+	 if ( $admin_check_screen == 'Manage Themes' )
+	{
+		?>
+		<div class="notice notice-info is-dismissible" style="margin-top:15px;">
+		<p>
+		 <a href="<?php echo wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug ); ?>">Install the WP Forms Lite plugin</a>
+		</p>
+		</div>
+		<?php
+	}
+	}
+
+	if ( $admin_check_screen == 'Manage Themes' )
+	{
+	?>
+		<div class="notice notice-success is-dismissible">
+				<b><p>Liked this theme? <a href="https://wordpress.org/support/theme/fad/reviews/#new-post" target="_blank">Leave us</a> a ***** rating. Thank you! </p></b>
+		</div>
+		<?php
+	}
+
 }
