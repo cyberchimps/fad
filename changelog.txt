@@ -1,5 +1,9 @@
 Fad
 ****************
+Version 2.0 (09/20/18)
+* Changed Look and feel
+
+
 Version 1.1 (07/19/17)
 - Added visible edit links in the customizer preview
 

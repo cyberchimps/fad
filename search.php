@@ -1,24 +1,32 @@
-<?php get_header(); ?>
-<section id="content" role="main">
-<?php if ( have_posts() ) : ?>
-<header class="header">
-<h1 class="entry-title"><?php printf( __( 'Search Results for: %s', 'fad' ), get_search_query() ); ?></h1>
-</header>
-<?php while ( have_posts() ) : the_post(); ?>
-<?php get_template_part( 'entry' ); ?>
-<?php endwhile; ?>
-<?php get_template_part( 'nav', 'below' ); ?>
-<?php else : ?>
-<article id="post-0" class="post no-results not-found">
-<header class="header">
-<h2 class="entry-title"><?php _e( 'Nothing Found', 'fad' ); ?></h2>
-</header>
-<section class="entry-content">
-<p><?php _e( 'Sorry, nothing matched your search. Please try again.', 'fad' ); ?></p>
-<?php get_search_form(); ?>
-</section>
-</article>
-<?php endif; ?>
-</section>
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+/**
+ * The template for displaying search results pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
+ *
+ * @package fad
+ */
+
+get_header();
+?>
+
+	<section id="primary" class="content-area">
+		<main id="main" class="site-main">
+
+		<?php if ( have_posts() ) :
+			get_template_part( 'template-parts/content', 'search' );
+
+		else :
+
+		get_template_part( 'template-parts/content', 'none' );
+
+		endif;
+
+if ( fad_set_page_post_layout() == 'right-sidebar' ) {
+ get_sidebar();
+}
+?>
+</div>
+</div>
+<?php
+get_footer();
