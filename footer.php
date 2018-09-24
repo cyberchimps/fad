@@ -17,9 +17,9 @@
 		<div class="container">
 			<div class="row">
 
-		<div id="sidebar_footer" class=" col-md-12">
+		<div id="sidebar_footer" class=" col-md-12 col-sm-12">
 
-		<?php dynamic_sidebar( 'footer-1' ); ?>
+		<?php dynamic_sidebar( 'footer-widget' ); ?>
 
 
 		</div><!-- #footer -->
@@ -43,7 +43,7 @@
 						echo $footer_copyright_text;
 				} else {
 					?>
-						<a href="<?php echo esc_url( __( 'https://cyberChimps.com/', 'fad' ) ); ?>">
+						<a target="_blank" href="<?php echo esc_url( __( 'https://cyberChimps.com/', 'fad' ) ); ?>">
 						<?php
 						/* translators: %s: CMS name, i.e. WordPress. */
 						printf( esc_html__( ' %s WordPress Themes', 'fad' ), 'CyberChimps' );

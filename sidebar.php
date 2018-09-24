@@ -13,7 +13,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 ?>
 
 
-<div id="secondary" class="col-md-4">
+<div id="secondary" class="col-md-4 col-sm-12">
 
 
 	<div id="sidebar" class="widget-area">

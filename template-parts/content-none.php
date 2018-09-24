@@ -12,7 +12,7 @@
 		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'fad' ); ?></h1>
 
 			<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-8 col-sm-12">
 				<br><br><br>
 
 		<?php
@@ -33,12 +33,12 @@
 
 		elseif ( is_search() ) :
 			?>
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'fad' ); ?></p>
 		</div>
 
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 				<br><br>				<br><br>
 
 
@@ -49,12 +49,12 @@
 			?>
 		</div>
 
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'fad' ); ?></p>
 		</div>
 
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 				<br><br>
 				<br><br>
 

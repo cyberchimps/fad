@@ -22,12 +22,12 @@ get_header();
   <main id="main" class="site-main" role="main">
 	<div class="container">
 	  <div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 
 		<?php  get_template_part( 'template-parts/content', 'featured' ); ?>
 </div>
-<div class="recentposts col-md-12">	<h2>Recent Posts</h2></div>
-<div id="recentpost" class="col-md-8 col-sm-8">
+<div class="recentposts col-md-12 col-sm-12">	<h2>Recent Posts</h2></div>
+<div id="recentpost" class="col-md-8 col-sm-12 col-sm-12">
 		<?php
 		if ( have_posts() ) :
 				$args = array (
@@ -109,10 +109,7 @@ get_header();
                                        <div class="post_details"><span><img src="<?php echo  get_template_directory_uri().'/images/time_grey.png' ?>" /><?php echo get_the_date(); ?></span><img src="<?php echo  get_template_directory_uri() .'/images/author01.png'; ?>"><span>by <?php echo the_author_posts_link(); ?></span>
                                        </div>
                                         <?php	             the_excerpt();    ?>
-                                          <a href="<?php echo esc_url(get_permalink()); ?>" class="button read_more">Read More</a>
-
-
-              					             </div>
+                                        </div>
             					             <?php
         											/*
         											 * Include the Post-Type-specific template for the content.

@@ -72,67 +72,98 @@ function fad_customize( $wp_customize ) {
 	);
 
 
+		$wp_customize->add_section( 'fad_design_section', array(
+				'title' => __( 'Colors', 'fad' ),
+				'priority' => 35,
+		) );
+
+	// Background Color
+
+	$wp_customize->add_setting( 'fad_background_colorpicker', array(
+			'default' => '#225277',
+			'type' => 'option',
+			'sanitize_callback' => 'fad_text_sanitization'
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'background_colorpicker', array(
+			'label' => __( 'Background Color', 'fad' ),
+			'section' => 'fad_design_section',
+			'settings' => 'fad_background_colorpicker',
+	) ) );
+
+	//Main Menu Text Color
+	$wp_customize->add_setting( 'fad_main_menu_text_colorpicker', array(
+			'default' => '#225277',
+			'type' => 'option',
+			'sanitize_callback' => 'fad_text_sanitization'
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_menu_text_colorpicker', array(
+			'label' => __( 'Main Menu Text Color', 'fad' ),
+			'section' => 'fad_design_section',
+			'settings' => 'fad_main_menu_text_colorpicker',
+	) ) );
+
+	// Top Menu Text Color
+	$wp_customize->add_setting( 'fad_top_menu_text_colorpicker', array(
+			'default' => '#333333',
+			'type' => 'option',
+			'sanitize_callback' => 'fad_text_sanitization'
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_menu_text_colorpicker', array(
+			'label' => __( 'Top Menu Text Color', 'fad' ),
+			'section' => 'fad_design_section',
+			'settings' => 'fad_top_menu_text_colorpicker',
+	) ) );
+
+	$wp_customize->add_section( 'fad_blog_section', array(
+			'title' => __( 'Blog Options', 'fad' ),
+			'priority' => 36,
+	) );
+
+	$wp_customize->add_setting( 'fad_post_excerpts', array(
+			'type' => 'option',
+			'sanitize_callback' => 'fad_sanitize_checkbox'
+	) );
+	$wp_customize->add_control( 'post_excerpts', array(
+			'label' => __( 'Post Excerpts', 'fad' ),
+			'section' => 'fad_blog_section',
+			'settings' => 'fad_post_excerpts',
+			'type' => 'checkbox'
+	) );
+
+
+	$wp_customize->add_setting( 'fad_options_blog_read_more_text', array(
+			'type' => 'option',
+			'sanitize_callback' => 'fad_text_sanitization'
+	) );
+	$wp_customize->add_control( 'fad_blog_read_more_text', array(
+			'label' => __( 'Read More Text', 'fad' ),
+			'section' => 'fad_blog_section',
+			'default' => __( 'Read More...', 'fad' ),
+			'settings' => 'fad_options_blog_read_more_text',
+			'type' => 'text'
+	) );
+
+	//Post Excerpts Length
+	$wp_customize->add_setting( 'fad_options_blog_excerpt_length', array(
+			'type' => 'option',
+			'sanitize_callback' => 'fad_text_sanitization'
+	) );
+	$wp_customize->add_control( 'fad_blog_excerpt_length', array(
+			'label' => __( 'Excerpt Length', 'fad' ),
+			'section' => 'fad_blog_section',
+			'default' => 55,
+			'settings' => 'fad_options_blog_excerpt_length',
+			'type' => 'text'
+	) );
+
+
 	return $wp_customize;
 }
 
 
-
-
-function newtheme_customize_reset_control( $wp_customize ) {
-	/**
-	 * Reset Control
-	 */
-	class newtheme_Customize_reset_Control extends WP_Customize_Control {
-
-		public $type = 'button';
-
-		public function render_content() {
-			?>
-		<label>
-			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-
-		</label>
-			<?php
-		}
-	}
-}
-add_action( 'customize_register', 'newtheme_customize_reset_control', 1, 1 );
-
-
-
-
-/**
- * Customizer partial refresh
- *
- * @param array $wp_customize Customizer options.
- */
-function fad_customize_edit_links( $wp_customize ) {
-	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
-	$wp_customize->selective_refresh->add_partial(
-		'blogname',
-		array(
-			'selector'        => '.site-title a',
-			'render_callback' => 'fad_customize_partial_blogname',
-		)
-	);
-
-	$wp_customize->selective_refresh->add_partial(
-		'blogdescription',
-		array(
-			'selector'        => '.blog-description p',
-			'render_callback' => 'fad_customize_partial_blogdescription',
-		)
-	);
-
-	$wp_customize->selective_refresh->add_partial(
-		'fad_header_option',
-		array(
-			'selector' => '#copyright',
-		)
-	);
-}
 /**
  * Customizer partial refresh - blogname
  */
@@ -148,8 +179,3 @@ function fad_customize_partial_blogdescription() {
 }
 
 add_action( 'customize_register', 'fad_customize_edit_links' );
-
-function fad_sanitize_checkbox( $checked ) {
-	// Boolean check.
-	return ( ( isset( $checked ) && true == $checked ) ? true : false );
-}
