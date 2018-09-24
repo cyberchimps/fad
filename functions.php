@@ -307,11 +307,11 @@ function fad_set_page_post_layout() {
  */
 function fad_set_class() {
 	$fad_layout_options = get_theme_mod( 'fad_layout_options', 'right-sidebar' );
-	$content_class              = 'col-md-8 col-sm-12';
+	$content_class              = 'col-lg-8 col-md-8 col-sm-12';
 	if ( $fad_layout_options == 'no-sidebar' ) {
-		$content_class = 'col-md-12 col-sm-12';
+		$content_class = 'col-lg-12 col-md-12 col-sm-12';
 	} else {
-		$content_class = 'col-md-8 col-sm-12';
+		$content_class = 'col-lg-8 col-md-8 col-sm-12';
 	}
 	return $content_class;
 }

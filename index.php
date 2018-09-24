@@ -22,12 +22,12 @@ get_header();
   <main id="main" class="site-main" role="main">
 	<div class="container">
 	  <div class="row">
-			<div class="col-md-12 col-sm-12">
+			<div class="col-lg-12 col-md-12 col-sm-12">
 
 		<?php  get_template_part( 'template-parts/content', 'featured' ); ?>
 </div>
-<div class="recentposts col-md-12 col-sm-12">	<h2>Recent Posts</h2></div>
-<div id="recentpost" class="col-md-8 col-sm-12 col-sm-12">
+<div class="recentposts  col-md-12 col-lg-12 col-sm-12">	<h2>Recent Posts</h2></div>
+<div id="recentpost" class="col-lg-8 col-md-8 col-sm-12">
 		<?php
 		if ( have_posts() ) :
 				$args = array (

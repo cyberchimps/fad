@@ -17,13 +17,13 @@ get_header();
 
 
 					<div class="row">
-						<div class="col-md-8 col-sm-12">
+						<div class="col-lg-8 col-md-8 col-sm-12">
 
-							<div class="col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-12 col-sm-12">
 
 					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'fad' ); ?></p>
 </div>
-<div class="col-md-12 col-sm-12">
+<div class="col-lg-12 col-md-12 col-sm-12">
 
 		<?php
 		get_search_form();
@@ -31,7 +31,7 @@ get_header();
 		the_widget( 'WP_Widget_Recent_Posts' );
 		?>
 </div>
-<div class="col-md-12 col-sm-12">
+<div class="col-lg-12 col-md-12 col-sm-12">
 
 					<div class="widget widget_categories">
 						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'fad' ); ?></h2>
@@ -51,7 +51,7 @@ get_header();
 					</div><!-- .widget -->
 				</div><!-- .widget -->
 
-<div class="col-md-12 col-sm-12">
+<div class="col-lg-12 col-md-12 col-sm-12">
 
 				<?php
 				/* translators: %1$s: smiley */
