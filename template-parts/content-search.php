@@ -4,55 +4,38 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package fad
+ * @package Fad
  */
 
 ?>
 
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'fad' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<header class="entry-header">
+		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-				               <div class="row">
-				               	<div class="col-lg-8 col-md-8 col-sm-12">
-<br><br><br>
+		<?php if ( 'post' === get_post_type() ) : ?>
+		<div class="entry-meta">
+			<div class="post_details">
+				<span>
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/time_grey.png' ); ?>" />
+					<?php fad_posted_on(); ?>
+				</span>
+				<span>
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/author01.png' ); ?>">
+					<?php fad_posted_by(); ?>
+				</span>
+			</div>
+		</div><!-- .entry-meta -->
+		<?php endif; ?>
+	</header><!-- .entry-header -->
 
-				                         <?php
-				                         while ( have_posts() ) :
-				                           the_post();
-				                           ?>
-				                           <div class=" postlisting">
-				                             <div class="row">
-				                             <div class="col-md-6">
-				                             <?php
+	<?php fad_post_thumbnail(); ?>
 
-				                                 the_title( '<h3 class="marginnone">', '</h3>' );
+	<div class="entry-summary">
+		<?php the_excerpt(); ?>
+	</div><!-- .entry-summary -->
 
-				                               if ( 'post' === get_post_type() ) :
-				                                 ?>
-
-				                                 <div class="post_details"><span><img src="<?php echo  get_template_directory_uri() .'/images/time_grey.png' ?>" /><?php echo get_the_date(); ?></span><img src="<?php echo  get_template_directory_uri() .'/images/author01.png'; ?>"><span>by <?php echo the_author_posts_link(); ?></span>
-				                                 </div>
-				                               <?php    the_excerpt(); ?>
-				 		                  </div>
-				                       <div class="col-md-6">
-																 <a class="post-thumbnail" aria-hidden="true" href="<?php echo esc_url(get_permalink()); ?>">
-																 <?php	if(has_post_thumbnail()) the_post_thumbnail('fad_archive');?>
-															 </a>
-															 </div>
-
-				                     </div>
-				                     </div>
-				                 <?php endif;
-				               endwhile;
-				                  ?>
-				                </div>
-
-
-				 <?php
-
-
-			the_posts_navigation();
+	<footer class="entry-footer">
+		<?php fad_entry_footer(); ?>
+	</footer><!-- .entry-footer -->
+</article><!-- #post-<?php the_ID(); ?> -->

@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package fad
+ * @package Fad
  */
 
 if ( ! function_exists( 'fad_posted_on' ) ) :
@@ -27,7 +27,7 @@ if ( ! function_exists( 'fad_posted_on' ) ) :
 
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'fad' ),
+			esc_html_x( ' %s', 'post date', 'fad' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
@@ -63,14 +63,14 @@ if ( ! function_exists( 'fad_entry_footer' ) ) :
 			$categories_list = get_the_category_list( esc_html__( ', ', 'fad' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s ', 'fad' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'fad' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 			}
 
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'fad' ) );
 			if ( $tags_list ) {
 				/* translators: 1: list of tags. */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s ', 'fad' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'fad' ) . '</span>', $tags_list ); // WPCS: XSS OK.
 			}
 		}
 
@@ -128,7 +128,7 @@ if ( ! function_exists( 'fad_post_thumbnail' ) ) :
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail('fad_single'); ?>
+				<?php the_post_thumbnail(); ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
@@ -136,7 +136,7 @@ if ( ! function_exists( 'fad_post_thumbnail' ) ) :
 		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 			<?php
 			the_post_thumbnail(
-				'fad_archive',
+				'post-thumbnail',
 				array(
 					'alt' => the_title_attribute(
 						array(

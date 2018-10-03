@@ -1,181 +1,223 @@
 <?php
 /**
- * fad Theme Customizer
+ * Fad Theme Customizer
  *
- * @package fad
+ * @package Fad
  */
 
-add_action( 'customize_register', 'fad_customize' );
-function fad_customize( $wp_customize ) {
+/**
+ * Add postMessage support for site title and description for the Theme Customizer.
+ *
+ * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+ */
+function fad_customize_register( $wp_customize ) {
+	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
+	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
-	/**
-	 * Class Cyberchimps_Form
-	 *
-	 * Creates a form input type with the option to add description and placeholders
-	 */
-	class Cyberchimps_Form extends WP_Customize_Control {
-
-		public function render_content() {
-			switch ( $this->type ) {
-				case 'textarea':
-					?>
-					<label>
-						<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-						<textarea value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?> style="width: 97%; height: 200px;"></textarea>
-					</label>
-					<?php
-					break;
-			}
-		}
+	if ( isset( $wp_customize->selective_refresh ) ) {
+		$wp_customize->selective_refresh->add_partial(
+			'blogname',
+			array(
+				'selector'        => '.site-title a',
+				'render_callback' => 'fad_customize_partial_blogname',
+			)
+		);
+		$wp_customize->selective_refresh->add_partial(
+			'blogdescription',
+			array(
+				'selector'        => '.site-description',
+				'render_callback' => 'fad_customize_partial_blogdescription',
+			)
+		);
 	}
 
-	/*
-	 --------------------------------------------------------------
-	// Header SECTION
-	-------------------------------------------------------------- */
-
 	$wp_customize->add_section(
-		  'fad_demo_section', array(
-			'title'    => __( 'Header Option', 'fad' ),
+		'fad_demo_section',
+		array(
+			'title'    => __( 'Header Search Option', 'fad' ),
 			'priority' => 60,
 		)
 	);
 
-		$wp_customize->add_setting(
-			  'fad_header_search', array(
-				'default' => 1,
-				'sanitize_callback' => 'fad_sanitize_checkbox',
-			)
-		);
-
-		$wp_customize->add_control( 'fad_header_search', array(
-					'label' => __( 'Show Hide Header Search', 'fad' ),
-					'section' => 'fad_demo_section',
-					'settings' => 'fad_header_search',
-					'type' => 'checkbox',
-				)
-		);
-
 	$wp_customize->add_setting(
-		  'fad_title_toggle_logo', array(
-			'default' => 1,
+		'fad_header_search',
+		array(
+			'default'           => 1,
 			'sanitize_callback' => 'fad_sanitize_checkbox',
 		)
 	);
 
-	$wp_customize->add_control( 'fad_title_toggle_logo', array(
-				'label' => __( 'disable site title and description', 'fad' ),
-				'section' => 'title_tagline',
-				'settings' => 'fad_title_toggle_logo',
-				'type' => 'checkbox',
-			)
+	$wp_customize->add_control(
+		'fad_header_search',
+		array(
+			'label'    => __( 'Hide Header Search', 'fad' ),
+			'section'  => 'fad_demo_section',
+			'settings' => 'fad_header_search',
+			'type'     => 'checkbox',
+		)
 	);
 
+	// Main Menu Text Color.
+	$wp_customize->add_setting(
+		'fad_main_menu_text_colorpicker',
+		array(
+			'default'           => '#225277',
+			'type'              => 'option',
+			'sanitize_callback' => 'fad_text_sanitization',
+		)
+	);
 
-		$wp_customize->add_section( 'fad_design_section', array(
-				'title' => __( 'Colors', 'fad' ),
-				'priority' => 35,
-		) );
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'main_menu_text_colorpicker',
+			array(
+				'label'    => __( 'Main Menu Text Color', 'fad' ),
+				'section'  => 'colors',
+				'settings' => 'fad_main_menu_text_colorpicker',
+			)
+		)
+	);
 
-	// Background Color
+	// Top Menu Text Color.
+	$wp_customize->add_setting(
+		'fad_top_menu_text_colorpicker',
+		array(
+			'default'           => '#333333',
+			'type'              => 'option',
+			'sanitize_callback' => 'fad_text_sanitization',
+		)
+	);
 
-	$wp_customize->add_setting( 'fad_background_colorpicker', array(
-			'default' => '#225277',
-			'type' => 'option',
-			'sanitize_callback' => 'fad_text_sanitization'
-	) );
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'top_menu_text_colorpicker',
+			array(
+				'label'    => __( 'Top Menu Text Color', 'fad' ),
+				'section'  => 'colors',
+				'settings' => 'fad_top_menu_text_colorpicker',
+			)
+		)
+	);
 
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'background_colorpicker', array(
-			'label' => __( 'Background Color', 'fad' ),
-			'section' => 'fad_design_section',
-			'settings' => 'fad_background_colorpicker',
-	) ) );
-
-	//Main Menu Text Color
-	$wp_customize->add_setting( 'fad_main_menu_text_colorpicker', array(
-			'default' => '#225277',
-			'type' => 'option',
-			'sanitize_callback' => 'fad_text_sanitization'
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_menu_text_colorpicker', array(
-			'label' => __( 'Main Menu Text Color', 'fad' ),
-			'section' => 'fad_design_section',
-			'settings' => 'fad_main_menu_text_colorpicker',
-	) ) );
-
-	// Top Menu Text Color
-	$wp_customize->add_setting( 'fad_top_menu_text_colorpicker', array(
-			'default' => '#333333',
-			'type' => 'option',
-			'sanitize_callback' => 'fad_text_sanitization'
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'top_menu_text_colorpicker', array(
-			'label' => __( 'Top Menu Text Color', 'fad' ),
-			'section' => 'fad_design_section',
-			'settings' => 'fad_top_menu_text_colorpicker',
-	) ) );
-
-	$wp_customize->add_section( 'fad_blog_section', array(
-			'title' => __( 'Blog Options', 'fad' ),
+	$wp_customize->add_section(
+		'fad_blog_section',
+		array(
+			'title'    => __( 'Blog Options', 'fad' ),
 			'priority' => 36,
-	) );
+		)
+	);
 
-	$wp_customize->add_setting( 'fad_post_excerpts', array(
-			'type' => 'option',
-			'sanitize_callback' => 'fad_sanitize_checkbox'
-	) );
-	$wp_customize->add_control( 'post_excerpts', array(
-			'label' => __( 'Post Excerpts', 'fad' ),
-			'section' => 'fad_blog_section',
+	$wp_customize->add_setting(
+		'fad_post_excerpts',
+		array(
+			'type'              => 'option',
+			'sanitize_callback' => 'fad_sanitize_checkbox',
+		)
+	);
+	$wp_customize->add_control(
+		'post_excerpts',
+		array(
+			'label'    => __( 'Post Excerpts', 'fad' ),
+			'section'  => 'fad_blog_section',
 			'settings' => 'fad_post_excerpts',
-			'type' => 'checkbox'
-	) );
+			'type'     => 'checkbox',
+		)
+	);
 
-
-	$wp_customize->add_setting( 'fad_options_blog_read_more_text', array(
-			'type' => 'option',
-			'sanitize_callback' => 'fad_text_sanitization'
-	) );
-	$wp_customize->add_control( 'fad_blog_read_more_text', array(
-			'label' => __( 'Read More Text', 'fad' ),
-			'section' => 'fad_blog_section',
-			'default' => __( 'Read More...', 'fad' ),
+	$wp_customize->add_setting(
+		'fad_options_blog_read_more_text',
+		array(
+			'type'              => 'option',
+			'sanitize_callback' => 'fad_text_sanitization',
+		)
+	);
+	$wp_customize->add_control(
+		'fad_blog_read_more_text',
+		array(
+			'label'    => __( 'Read More Text', 'fad' ),
+			'section'  => 'fad_blog_section',
+			'default'  => __( 'Read More...', 'fad' ),
 			'settings' => 'fad_options_blog_read_more_text',
-			'type' => 'text'
-	) );
+			'type'     => 'text',
+		)
+	);
 
-	//Post Excerpts Length
-	$wp_customize->add_setting( 'fad_options_blog_excerpt_length', array(
-			'type' => 'option',
-			'sanitize_callback' => 'fad_text_sanitization'
-	) );
-	$wp_customize->add_control( 'fad_blog_excerpt_length', array(
-			'label' => __( 'Excerpt Length', 'fad' ),
-			'section' => 'fad_blog_section',
-			'default' => 55,
+	// Post Excerpts Length.
+	$wp_customize->add_setting(
+		'fad_options_blog_excerpt_length',
+		array(
+			'type'              => 'option',
+			'sanitize_callback' => 'fad_text_sanitization',
+		)
+	);
+
+	$wp_customize->add_control(
+		'fad_blog_excerpt_length',
+		array(
+			'label'    => __( 'Excerpt Length', 'fad' ),
+			'section'  => 'fad_blog_section',
+			'default'  => 55,
 			'settings' => 'fad_options_blog_excerpt_length',
-			'type' => 'text'
-	) );
-
+			'type'     => 'text',
+		)
+	);
 
 	return $wp_customize;
 }
-
+add_action( 'customize_register', 'fad_customize_register' );
 
 /**
- * Customizer partial refresh - blogname
+ * Render the site title for the selective refresh partial.
+ *
+ * @return void
  */
 function fad_customize_partial_blogname() {
-	 bloginfo( 'name' );
+	bloginfo( 'name' );
 }
 
 /**
- * Customizer partial refresh - blog-description
+ * Render the site tagline for the selective refresh partial.
+ *
+ * @return void
  */
 function fad_customize_partial_blogdescription() {
 	bloginfo( 'description' );
 }
 
-add_action( 'customize_register', 'fad_customize_edit_links' );
+/**
+ * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+ */
+function fad_customize_preview_js() {
+	wp_enqueue_script( 'fad-customizer', get_template_directory_uri() . '/assets/js/customizer.js', array( 'customize-preview' ), '20151215', true );
+}
+add_action( 'customize_preview_init', 'fad_customize_preview_js' );
+
+/**
+ * [fad_text_sanitization description]
+ *
+ * @param string $text [description].
+ * @return string       [description].
+ */
+function fad_text_sanitization( $text ) {
+			return sanitize_text_field( $text );
+}
+
+/**
+ * [fad_sanitize_checkbox description]
+ *
+ * @param  [type] $input [description].
+ * @return bool        [description]
+ */
+function fad_sanitize_checkbox( $input ) {
+	if ( $input ) {
+		$output = '1';
+	}
+	else {
+		$output = false;
+	}
+
+	return $output;
+}

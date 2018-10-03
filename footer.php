@@ -6,64 +6,41 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package fad
+ * @package Fad
  */
 
 ?>
 
-	</div><!-- #content -->
-
 	<footer id="colophon" class="site-footer">
 		<div class="container">
 			<div class="row">
+				<div id="sidebar_footer" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<?php dynamic_sidebar( 'footer-widget' ); ?>
+				</div>
 
-		<div id="sidebar_footer" class="col-lg-12 col-md-12 col-sm-12">
-
-		<?php dynamic_sidebar( 'footer-widget' ); ?>
-
-
-		</div><!-- #footer -->
-		<div class="fad-footer-image">
-			<?php $fad_footer_image = get_theme_mod( 'fad_footer_image' ); ?>
-			<?php
-			if ( ! empty( $fad_footer_image ) ) {
-				?>
-				<img src="<?php echo esc_attr( $fad_footer_image ); ?>" alt="<?php esc_attr_e( 'footer image', 'fad' ); ?>" />
-				<?php
-			}
-			?>
-		</div>
-		<div class="cc-credit-text col-md-6">
-			<?php $footer_copyright_text = get_theme_mod( 'footer_copyright_text' ); ?>
-				<?php
-				if ( ! empty( $footer_copyright_text ) ) {
-					?>
-						<span>
-						<?php
-						echo $footer_copyright_text;
-				} else {
-					?>
-						<a target="_blank" href="<?php echo esc_url( __( 'https://cyberChimps.com/', 'fad' ) ); ?>">
-						<?php
-						/* translators: %s: CMS name, i.e. WordPress. */
-						printf( esc_html__( ' %s WordPress Themes', 'fad' ), 'CyberChimps' );
-						?>
+					<div class="site-info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-left cc-credit-text">
+						<a href="<?php echo esc_url( __( 'https://cyberchimps.com', 'fad' ) ); ?>">
+							<?php
+							/* translators: %s: CMS name, i.e. WordPress. */
+							printf( '%s WordPress Themes', 'CyberChimps' );
+							?>
 						</a>
-
-					</div>
-						<div class="sep  col-md-6">
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right sep">
+							<a href="<?php echo esc_url( __( 'https://cyberchimps.com/fad', 'fad' ) ); ?>">
 							<?php
 							/* translators: 1: Theme name, 2: Theme author. */
-							printf( esc_html__( '@ %1$s %2$s', 'fad' ), 'Fad', 'Free Theme' );
+							printf( '%1$s ', '@ Fad Free Theme' );
 							?>
+							</a>
 						</div>
-								<?php
-				}
-
-
-				?>
-
-		</div><!-- .site-info -->
+					</div>
+					</div><!-- .site-info -->
+				</div>
+			</div>
+		</div>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
