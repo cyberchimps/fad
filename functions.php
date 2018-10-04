@@ -281,8 +281,7 @@ function fad_css_styles() {
 	<?php endif; ?>
 
 	<?php if ( ! empty( $top_menu_color ) ) : ?>
-				.site-title,
-				.site-description,
+
 				.topnavigation li a {
 				color : <?php echo esc_attr( $top_menu_color ); ?> !important;
 				}
