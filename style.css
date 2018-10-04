@@ -1433,6 +1433,9 @@ a.label.label-primary {
    .cc-credit-text, .sep {
        text-align: center !important;
    }
+   .navbar-nav li a {
+   color:#fff !important;
+   }
 
 }
 
